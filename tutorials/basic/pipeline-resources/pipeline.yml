@@ -4,12 +4,13 @@ resources:
   type: git
   source:
     uri: https://github.com/pivotal-ben-chacko/concourse-tutorial.git
-    branch: develop
+    branch: master
 
 jobs:
 - name: job-hello-world
   public: true
   plan:
   - get: resource-tutorial
+    trigger: true
   - task: hello-world
     file: resource-tutorial/tutorials/basic/task-hello-world/task_hello_world.yml
