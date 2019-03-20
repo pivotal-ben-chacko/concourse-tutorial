@@ -1,0 +1,26 @@
+---
+resources:
+- name: release
+  type: s3
+  source:
+    bucket: ben-pivotal
+    versioned_file: artifacts/release.tgz
+    access_key_id: AKIAIG5RYEZKM74ZUS4A
+    secret_access_key: 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
+    initial_version: "123"
+- name: resource-tutorial
+  type: git
+  source:
+    uri: https://github.com/pivotal-ben-chacko/concourse-tutorial.git
+    branch: master
+jobs:
+- name: job-hello-world
+  public: true
+  plan:
+  - get: resource-tutorial
+    trigger: true
+  - task: hello-world
+    file: resource-tutorial/tutorials/basic/task-hello-world/task_hello_world.yml
+  - put: release
+    params: 
+      file: resource-tutorial/tutorials/basic/task-hello-world/task_hello_world.yml
