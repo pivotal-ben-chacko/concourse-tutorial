@@ -6,5 +6,4 @@ image_resource:
   source: {repository: busybox}
 
 run:
-  path: touch
-  args: [newFile && ls -l]
+  path: pwd
